@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+	
+<ui:composition template="index.xhtml">
+<ui:define name="conteudo">
+
+	<center>
+
+	<h:messages 
+		errorStyle="color:red" 
+		warnStyle="color:orange" 
+		infoStyle="color:green"
+		globalOnly="false"/>
+		
+	<h1>.:Cadastro de Dado:.</h1>
+	<h:form>
+		<h:panelGrid columns="2">
+			<h:outputLabel value="Descrição:" />
+			<h:panelGroup>
+				<h:inputText 
+					id="itDescricao" 
+					value="#{dadoController.entity.descricao}" />
+				<h:message for="itDescricao" style="color:red"/>
+			</h:panelGroup>
+			
+			<h:outputLabel value="Lado:" />			
+			<h:panelGroup>
+				<h:inputText 
+					id="itLado" 
+					value="#{dadoController.entity.lado}" />
+				<h:message for="itLado" style="color:red"/>
+			</h:panelGroup>
+			
+			<h:outputLabel value="Cor:" />			
+			<h:panelGroup>
+				<h:inputText 
+					id="itCor" 
+					value="#{dadoController.entity.cor}" />
+				<h:message for="itCor" style="color:red"/>
+			</h:panelGroup>
+			
+			<h:outputLabel value="Preço:" />
+			<h:panelGroup>
+				<h:inputText 
+					id="itPreco" 
+					value="#{dadoController.entity.preco}" />
+				<h:message for="itPreco" style="color:red"/>
+			</h:panelGroup>
+			
+			<h:outputLabel value="Estoque:" />			
+			<h:panelGroup>
+				<h:inputText 
+					id="itEstoque" 
+					value="#{dadoController.entity.estoque}" />
+				<h:message for="itEstoque" style="color:red"/>
+			</h:panelGroup>									
+
+		
+		</h:panelGrid>
+		<h:commandButton value="Incluir"
+			disabled="#{dadoController.entity.id != null}"
+			actionListener="#{dadoController.incluir}" />
+			
+		<h:commandButton value="Alterar"
+			disabled="#{dadoController.entity.id == null}"
+			actionListener="#{dadoController.alterar}">
+		</h:commandButton>
+			
+		<h:commandButton value="Excluir"
+			disabled="#{dadoController.entity.id == null}"
+			actionListener="#{dadoController.remover}" >
+			<f:ajax execute="@this" render="@form formDataTable"/>
+		</h:commandButton>
+		
+		<h:commandButton value="Limpar" 
+			actionListener="#{dadoController.limpar}">
+			<f:ajax execute="@this" render="@form"/>
+		</h:commandButton>		
+	</h:form>
+	
+	<h:form id="formDataTable">
+		<h:dataTable id="dataTable" value="#{dadoController.listaDado}" 
+					 var="obj">
+			   <h:column>
+			      <f:facet name="header">Descrição</f:facet>
+			      <h:outputLabel value="#{obj.descricao}"/>
+			   </h:column>
+			   <h:column>
+			      <f:facet name="header">Preço</f:facet>
+			      <h:outputLabel value="#{obj.preco}"/>
+			   </h:column>
+			   <h:column>
+			      <f:facet name="header">Lado</f:facet>
+			      <h:outputLabel value="#{obj.lado}"/>
+			   </h:column>
+			   <h:column>
+			      <f:facet name="header">Cor</f:facet>
+			      <h:outputLabel value="#{obj.cor}"/>
+			   </h:column>
+			   <h:column>
+			      <f:facet name="header">Estoque</f:facet>
+			      <h:outputLabel value="#{obj.estoque}"/>
+			   </h:column>
+			   <h:column>
+			      <f:facet name="header">Ação</f:facet>
+			      <h:commandLink value="Editar" 
+			      		action="#{dadoController.editar(obj)}"/>
+			   </h:column>		   
+		</h:dataTable>
+	</h:form>
+	
+	</center>
+	
+</ui:define>
+</ui:composition>
+</html>
