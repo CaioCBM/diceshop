@@ -19,8 +19,10 @@
 			<h1 >.: Dice Shop :.</h1>
 			<div >
 				<h:form>
-					<h:outputLabel value="Olá #{templateController.usuarioLogado.nome}"
-						rendered="#{templateController.usuarioLogado != null}"/>
+					<h:commandLink value="Olá #{templateController.usuarioLogado.nome}" 
+						rendered="#{templateController.usuarioLogado != null}" 
+						action="perfilusuario.xhtml?faces-redirect=true"
+						style= "color:white ; "/>
 					<h:commandLink value=" (Sair)"   
 						action="#{templateController.encerrarSessao}"
 						rendered="#{templateController.usuarioLogado != null}"
@@ -37,9 +39,9 @@
 					<h:commandLink value="Cadastro de Usuário" action="usuario.xhtml?faces-redirect=true"/> <br/>
 					<h:commandLink value="Cadastro de Dado" action="consultadado.xhtml?faces-redirect=true"/> <br/>
 					<h:commandLink value="Venda de Dado" action="vendadado.xhtml?faces-redirect=true"/> <br/>
-					<h:commandLink value="Carrinho" action="carrinho.xhtml?faces-redirect=true"/> <br/>
-					<h:commandLink value="Histórico de Venda" action="historico.xhtml?faces-redirect=true"/> <br/>
-						
+					<h:commandLink value="Carrinho" action="carrinho.xhtml?faces-redirect=true"/> 
+					<span class="badge badge-primary"> #{templateController.carrinho} </span> <br/>
+
 				</h:form>
 			</ui:insert>
 		</div>

@@ -18,12 +18,10 @@
 				<h:inputText value="#{vendaDadoController.descricao}" />
 
 				<h:commandButton value="Pesquisar"
-					actionListener="#{vendaDadoController.pesquisar}" >
+					actionListener="#{consultaDadoController.pesquisar}" >
 					<f:ajax execute="panelForm" render="@all" />
-				</h:commandButton>	
-				
+				</h:commandButton>				
 			</h:panelGrid>
-
 			
 			<h:dataTable value="#{vendaDadoController.listaDado}" var="obj">
 				<h:column>

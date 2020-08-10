@@ -9,28 +9,33 @@
 		
 			<div class="container">
 				<div class="navbar navbar-inverse">
-					<div class="navbar-brand" style="width: 100%; text-align: center;">Detalhe da Venda</div>
+					<div class="navbar-brand" style="width: 100%; text-align: center; ">
+						<H1>Detalhe da Venda</H1>
+					</div>
 				</div>
+				
 				<div class="row">
 					<div class="col-xs-12 col-xs-updated">
 						<h:form styleClass="form-horizontal">
 							<h:messages id="messages" style="color:red" globalOnly="false"  />
-		
+							
 							<div class="mb-3">
-								<h:outputLabel value="Cliente: " styleClass="control-label" />
-								<h:outputText value=" #{detalheVendaController.venda.usuario.nome}" styleClass="control-label" />
+								<h:outputLabel value="Data de Venda:  "/>
+								<h:outputLabel value="#{detalheVendaController.venda.data}" style="margin-left: 5px" styleClass="control-label" >
+									<f:convertDateTime type="localDate" pattern="dd/MM/yyyy"/>
+								</h:outputLabel>
 							</div>
+							
 							<div class="mb-3">
-								<h:outputLabel value="Data da Venda: " styleClass="control-label" />
-								<h:outputText value=" #{detalheVendaController.venda.data}" styleClass="control-label" >
-									<f:convertDateTime type="localDate" pattern="dd-MM-yyyy"/>
-								</h:outputText>
-							</div>
-							<div class="mb-3">
-								<h:outputLabel value="Total da venda: " styleClass="control-label" />
+								<h:outputLabel value="Total da venda: "/>
+								<h:outputLabel value="#{detalheVendaController.venda.totalVenda}" style="margin-left: 5px">
+									<f:convertNumber  locale="pt_BR" currencySymbol="R$" type="currency"/>
+								</h:outputLabel>
+								<!--  
 								<h:outputText value=" #{detalheVendaController.venda.totalVenda}" styleClass="control-label" >
 									<f:convertNumber  locale="pt_BR" currencySymbol="R$" type="currency"/>
 								</h:outputText>
+								-->
 							</div>
 							
 							<hr/>
@@ -40,7 +45,7 @@
 								<h:dataTable value="#{detalheVendaController.venda.listaItemVenda}" var="obj" styleClass="table table-striped table-hover">>
 									<h:column>
 										<f:facet name="header">Nome</f:facet>
-										<h:outputLabel value="#{obj.livro.descricao}" />
+										<h:outputLabel value="#{obj.dado.descricao}" />
 									</h:column>
 									
 									<h:column>

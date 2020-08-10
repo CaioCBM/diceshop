@@ -26,13 +26,14 @@
 				<h:message for="itDescricao" style="color:red"/>
 			</h:panelGroup>
 			
-			<h:outputLabel value="Lado:" />			
-			<h:panelGroup>
-				<h:inputText 
-					id="itLado" 
-					value="#{dadoController.entity.lado}" />
-				<h:message for="itLado" style="color:red"/>
-			</h:panelGroup>
+			<h:outputLabel value="Tipo de Dado:" />
+			<h:selectOneMenu 
+				value="#{dadoController.entity.tipoDado}">
+				<f:selectItems 
+					value="#{dadoController.listaTipoDado}"
+							var="tipo" 
+							itemLabel="#{tipo.label}"/>
+			</h:selectOneMenu>
 			
 			<h:outputLabel value="Cor:" />			
 			<h:panelGroup>
@@ -90,11 +91,15 @@
 			   </h:column>
 			   <h:column>
 			      <f:facet name="header">Preço</f:facet>
-			      <h:outputLabel value="#{obj.preco}"/>
+			      <h:outputLabel value="#{obj.preco}">
+			      	<f:convertNumber  locale="pt_BR" currencySymbol="R$" type="currency"/>
+			      </h:outputLabel>
 			   </h:column>
 			   <h:column>
-			      <f:facet name="header">Lado</f:facet>
-			      <h:outputLabel value="#{obj.lado}"/>
+			      	<f:facet name="header">Tipo de Dado</f:facet>
+			     	<h:outputLabel value="#{obj.tipoDado.label}">
+					</h:outputLabel>
+							
 			   </h:column>
 			   <h:column>
 			      <f:facet name="header">Cor</f:facet>

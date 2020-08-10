@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+		
+<ui:composition template="index.xhtml">
+<ui:define name="conteudo">
+	
+	<center>
+
+	<h:messages 
+		errorStyle="color:red" 
+		warnStyle="color:orange" 
+		infoStyle="color:green"
+		globalOnly="false"/>
+		
+	<h1>.:Edite seu Perfil:.</h1>
+	<h:form>
+		<h:panelGrid columns="2">
+			<h:outputLabel value="Nome:" />
+			<h:panelGroup>
+				<h:inputText 
+					id="itNome" 
+					required="true"
+					requiredMessage="Esse campo não pode ser nulo."
+					value="#{usuarioClienteController.usuarioAux.nome}">
+				</h:inputText>
+				<h:message for="itNome" style="color:red"/>
+				
+			</h:panelGroup>
+			
+			<h:outputLabel value="Data de Nascimento:" />
+			<h:panelGroup>
+				<h:inputText 
+					id="itDataNascimento" 
+					required="true"
+					requiredMessage="Esse campo não pode ser nulo."
+					value="#{usuarioClienteController.usuarioAux.dataNascimento}">
+						<f:convertDateTime pattern="dd/MM/yyyy" type="localDate"/>
+				</h:inputText>
+				<h:message for="itDataNascimento" style="color:red"/>
+			</h:panelGroup>
+			
+			<h:outputLabel value="Login:" />
+			<h:panelGroup>
+				<h:inputText 
+					id="itLogin" 
+					required="true"
+					requiredMessage="Esse campo não pode ser nulo."
+					value="#{usuarioClienteController.usuarioAux.login}" />
+				<h:message for="itLogin" style="color:red"/>
+			</h:panelGroup>
+			
+			<h:outputLabel value="Senha:" />
+			<h:panelGroup>
+				<h:inputSecret 
+					id="isSenha"
+					value="#{usuarioClienteController.usuarioAux.senha}" 
+					required="true"
+					requiredMessage="Esse campo não pode ser nulo."/>
+				<h:message for="isSenha" style="color:red"/>	
+ 			</h:panelGroup>
+ 			
+ 			<h:outputLabel value="Email:" />
+			<h:panelGroup>
+				<h:inputText 
+					id="itEmail" 
+					required="true"
+					requiredMessage="Esse campo não pode ser nulo."
+					value="#{usuarioClienteController.usuarioAux.email}" />
+				<h:message for="itEmail" style="color:red"/>
+			</h:panelGroup>
+			
+			<h:outputLabel value="CEP:" />
+			<h:panelGroup>
+				<h:inputText 
+					id="itCep" />
+					<!-- required="true"
+					requiredMessage="Esse campo não pode ser nulo."/>
+					value = CEP />-->
+				<h:message for="itCep" style="color:red"/>
+			</h:panelGroup>
+			
+			<h:outputLabel value="Endereço:" />
+			<h:panelGroup>
+				<h:inputText 
+					id="itEndereço" />
+					<!-- required="true"
+					requiredMessage="Esse campo não pode ser nulo."/>
+					value = CEP />-->
+				<h:message for="itEndereço" style="color:red"/>
+			</h:panelGroup>
+			
+		
+		</h:panelGrid>
+		<h:commandButton value="Alterar"
+			actionListener="#{usuarioClienteController.alterar}" />
+	</h:form>
+	</center>
+	
+</ui:define>
+</ui:composition>
+</html>
