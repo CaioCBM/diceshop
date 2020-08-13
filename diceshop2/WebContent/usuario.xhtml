@@ -9,62 +9,65 @@
 	
 	<center>
 
-	<h:messages 
-		errorStyle="color:red" 
-		warnStyle="color:orange" 
-		infoStyle="color:green"
-		globalOnly="false"/>
+			<h:messages 
+				id="messages"
+				errorStyle="list-style-type: none;"
+				errorClass="alert alert-danger"
+				warnStyle="list-style-type: none;"
+				warnClass="alert alert-warning" 
+				infoStyle="list-style-type: none;"
+				infoClass="alert alert-info"
+				globalOnly="false"/>
 		
-	<h1>.:Cadastro de Usuario:.</h1>
+	<h1>Cadastro de Usuario</h1>
+	
+	<br/>
+	
 	<h:form>
 		<h:panelGrid columns="2">
 			<h:outputLabel value="Nome:" />
 			<h:panelGroup>
-				<h:inputText 
+				<h:inputText value="#{usuarioController.entity.nome}"
 					id="itNome" 
-					required="true"
-					requiredMessage="Esse campo não pode ser nulo."
-					value="#{usuarioController.entity.nome}" />
-				<h:message for="itNome" style="color:red"/>
+					required="true"  
+					requiredMessage="Nome deve ser informado"/>
 			</h:panelGroup>
+			
 			
 			<h:outputLabel value="Data de Nascimento:" />
 			<h:panelGroup>
-				<h:inputText id="itDataNascimento" value="#{usuarioController.entity.dataNascimento}">
+				<h:inputText id="itDataNascimento" value="#{usuarioController.entity.dataNascimento}"
+					styleClass="dateClass" 
+					required="true"  
+					requiredMessage="Aniversario deve ser informado">
 					<f:convertDateTime pattern="dd/MM/yyyy" 
 									   type="localDate"/>
 				</h:inputText>
-				<h:message for="itDataNascimento" style="color:red"/>
 			</h:panelGroup>
+			
 			
 			<h:outputLabel value="Login:" />
 			<h:panelGroup>
-				<h:inputText 
+				<h:inputText value="#{usuarioController.entity.login}"
 					id="itLogin" 
 					required="true"
-					requiredMessage="Esse campo não pode ser nulo."
-					value="#{usuarioController.entity.login}" />
-				<h:message for="itLogin" style="color:red"/>
+					requiredMessage="Login deve ser informado"/>
 			</h:panelGroup>
 			
 			<h:outputLabel value="Senha:" />
 			<h:panelGroup>
-				<h:inputSecret 
+				<h:inputSecret value="#{usuarioController.entity.senha}" 
 					id="isSenha"
-					value="#{usuarioController.entity.senha}" 
 					required="true"
-					requiredMessage="Esse campo não pode ser nulo."/>
-				<h:message for="isSenha" style="color:red"/>	
+					requiredMessage="A senha deve ser informada"/>
  			</h:panelGroup>
  			
  			<h:outputLabel value="Email:" />
 			<h:panelGroup>
-				<h:inputText 
+				<h:inputText value="#{usuarioController.entity.email}"
 					id="itEmail" 
 					required="true"
-					requiredMessage="Esse campo não pode ser nulo."
-					value="#{usuarioController.entity.email}" />
-				<h:message for="itEmail" style="color:red"/>
+					requiredMessage="E-mail deve ser informada"/>
 			</h:panelGroup>
 			
 			<h:outputLabel value="Tipo de Usuário:" />
@@ -75,27 +78,69 @@
 							var="tipo" 
 							itemLabel="#{tipo.label}"/>
 			</h:selectOneMenu>
+			
+			<!-- 
+			
+			<h:outputLabel value="CEP: " />
+			<h:panelGroup>
+				<h:inputText value="#{usuarioController.entity.endereco.cep}" />
+			</h:panelGroup>
+			
+			<h:outputLabel value="Endereço:" />
+			<h:panelGroup>
+				<h:inputText value="#{usuarioController.entity.endereco.endereco}" />
+			</h:panelGroup>
+			
+			 -->
+		<br/>
 		
 		</h:panelGrid>
 		<h:commandButton value="Incluir"
+			style="cursor: pointer ; height: 40px ; margin-top: -7px ; margin-left: 5px"
+			styleClass="btn btn-outline-primary"
 			disabled="#{usuarioController.entity.id != null}"
 			actionListener="#{usuarioController.incluir}" />
 		<h:commandButton value="Alterar"
+			style="cursor: pointer ; height: 40px ; margin-top: -7px ; margin-left: 5px"
+			styleClass="btn btn-outline-primary"
 			disabled="#{usuarioController.entity.id == null}"
 			actionListener="#{usuarioController.alterar}" />
 		<h:commandButton value="Excluir"
+			style="cursor: pointer ; height: 40px ; margin-top: -7px ; margin-left: 5px"
+			styleClass="btn btn-danger"
 			disabled="#{usuarioController.entity.id == null}"
 			actionListener="#{usuarioController.remover}" >
 			<f:ajax execute="@this" render="@form formDataTable"/>
 		</h:commandButton>
 		<h:commandButton value="Limpar" 
+			style="cursor: pointer ; height: 40px ; margin-top: -7px ; margin-left: 5px"
+			styleClass="btn btn-warning"
 			actionListener="#{usuarioController.limpar}">
 			<f:ajax execute="@this" render="@form"/>
-		</h:commandButton>			
+		</h:commandButton>		
 	</h:form>
+	
+	<br/>
+	
+	<h:form>
+	<h:outputText value="Nome: "/>
+		<h:panelGroup>
+			<h:inputText 
+				value="#{usuarioController.filtro}" />
+		</h:panelGroup>
+		
+		<h:commandButton value="Pesquisar"
+	 		style="cursor: pointer ; height: 45px ; margin-top: -7px ; margin-left: 10px"
+	 		styleClass="btn btn-outline-secondary"
+			actionListener="#{usuarioController.pesquisar}" >			
+		</h:commandButton>	
+	</h:form>
+	
+	<br/>
 	
 	<h:form id="formDataTable">
 		<h:dataTable id="dataTable" value="#{usuarioController.listaUsuario}" 
+					styleClass="table table-striped table-bordered table-hover"
 					 var="obj">
 			   <h:column>            
 			      <f:facet name="header">Id</f:facet>            
@@ -126,7 +171,9 @@
 			   </h:column>				   
 			   <h:column>
 			      <f:facet name="header">Ação</f:facet>
-			      <h:commandLink value="Editar" 
+			      <h:commandLink value="Editar"
+			      		style="cursor: pointer"
+			      		styleClass="btn btn-outline-primary float-right"
 			      		actionListener="#{usuarioController.editar(obj)}"/>
 			   </h:column>		   
 		</h:dataTable>

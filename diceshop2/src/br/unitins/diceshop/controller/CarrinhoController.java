@@ -18,39 +18,40 @@ import br.unitins.diceshop.model.Venda;
 
 @Named
 @ViewScoped
-public class CarrinhoController implements Serializable{
+public class CarrinhoController implements Serializable {
 
 	private static final long serialVersionUID = 780477496476930858L;
 
 	private Venda venda;
 
 	public Venda getVenda() {
-		if (venda == null) 
+		if (venda == null)
 			venda = new Venda();
-		
+
 		// obtendo o carrinho da sessao
-		List<ItemVenda> carrinho = 
-				(ArrayList<ItemVenda>)Session.getInstance().getAttribute("carrinho");
-		
+		List<ItemVenda> carrinho = (ArrayList<ItemVenda>) Session.getInstance().getAttribute("carrinho");
+
 		// adicionando os itens do carrinho na venda
 		if (carrinho == null)
 			carrinho = new ArrayList<ItemVenda>();
 		venda.setListaItemVenda(carrinho);
-		
+
 		return venda;
 	}
-	
+
 	public void finalizar() {
-		Usuario usuario = (Usuario)Session.getInstance().getAttribute("usuarioLogado");
-		if (usuario == null) {
-			//REDIRECIONAR PARA TELA DE LOGIN
+		Usuario usuario = (Usuario) Session.getInstance().getAttribute("usuarioLogado");
+		List<ItemVenda> carrinho = (ArrayList<ItemVenda>) Session.getInstance().getAttribute("carrinho");
+
+		if (carrinho.size() == 0) {
+			Util.addErrorMessage("Carrinho vazio!");
 			return;
 		}
+		
 		// montar a venda
 		Venda venda = new Venda();
 		venda.setData(LocalDate.now());
 		venda.setUsuario(usuario);
-		List<ItemVenda> carrinho = (ArrayList<ItemVenda>)  Session.getInstance().getAttribute("carrinho");
 		venda.setListaItemVenda(carrinho);
 		// salvar no banco
 		VendaDAO dao = new VendaDAO();
@@ -61,26 +62,27 @@ public class CarrinhoController implements Serializable{
 		} else {
 			Util.addErrorMessage("Erro ao finalizar a Venda.");
 		}
-		
+
 	}
-	
+
 	public void remover(int idProduto) {
 
-        // Obtendo o carrinho da sessão.
-        List<ItemVenda> carrinho = (ArrayList<ItemVenda>) Session.getInstance().getAttribute("carrinho");
-        for (ItemVenda itemVenda : carrinho) {
-            if (itemVenda.getDado().getId() == idProduto) {
-                carrinho.remove(itemVenda);
-                break;
-            }
-        }
-    }
+		// Obtendo o carrinho da sessão.
+
+		List<ItemVenda> carrinho = (ArrayList<ItemVenda>) Session.getInstance().getAttribute("carrinho");
+		int cont = 0;
+		for (ItemVenda itemVenda : carrinho) {
+			if (itemVenda.getDado().getId() == idProduto) {
+				carrinho.remove(cont);
+				break;
+			}
+			cont++;
+		}
+	}
 
 	public void setVenda(Venda venda) {
-		
+
 		this.venda = venda;
 	}
-	
-	
-	
+
 }

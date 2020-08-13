@@ -8,44 +8,103 @@
 <ui:define name="conteudo">
 
 	<center>
-		<h1>Venda de Dados</h1>
-
+		<h1>Loja</h1>
+		
+		<br/>
+		
 		<h:form>
-			<h:messages style="color:red" />
-			<h:panelGrid id="panelForm"  columns="3">
-
-				<h:outputLabel value="Descrição do Dado: " />
-				<h:inputText value="#{vendaDadoController.descricao}" />
-
-				<h:commandButton value="Pesquisar"
-					actionListener="#{consultaDadoController.pesquisar}" >
-					<f:ajax execute="panelForm" render="@all" />
-				</h:commandButton>				
-			</h:panelGrid>
+		
+			<h:messages 
+				id="messages"
+				errorStyle="list-style-type: none;"
+				errorClass="alert alert-danger"
+				warnStyle="list-style-type: none;"
+				warnClass="alert alert-warning" 
+				infoStyle="list-style-type: none;"
+				infoClass="alert alert-info"
+				globalOnly="false"/>
+					
+			<h:panelGrid columns="5">
+			<h:panelGroup>
+				<h:commandButton value="D4" 
+	 				style="cursor: pointer ; height: 45px ; margin-top: -7px ; margin-left: 10px"
+					styleClass="btn btn-secondary"
+					action="#{vendaDadoController.pesquisarTipoDado(2)}" ></h:commandButton>
+				<h:commandButton value="D6" 
+	 				style="cursor: pointer ; height: 45px ; margin-top: -7px ; margin-left: 10px"
+					styleClass="btn btn-secondary"
+					action="#{vendaDadoController.pesquisarTipoDado(3)}" ></h:commandButton>
+				<h:commandButton value="D8" 
+	 				style="cursor: pointer ; height: 45px ; margin-top: -7px ; margin-left: 10px"
+					styleClass="btn btn-secondary"
+					action="#{vendaDadoController.pesquisarTipoDado(4)}" ></h:commandButton>
+				<h:commandButton value="D10" 
+	 				style="cursor: pointer ; height: 45px ; margin-top: -7px ; margin-left: 10px"
+					styleClass="btn btn-secondary"
+					action="#{vendaDadoController.pesquisarTipoDado(5)}" ></h:commandButton>
+				<h:commandButton value="D12" 
+	 				style="cursor: pointer ; height: 45px ; margin-top: -7px ; margin-left: 10px"
+					styleClass="btn btn-secondary"
+					action="#{vendaDadoController.pesquisarTipoDado(6)}" ></h:commandButton>
+				<h:commandButton value="D20" 
+	 				style="cursor: pointer ; height: 45px ; margin-top: -7px ; margin-left: 10px"
+					styleClass="btn btn-secondary"
+					action="#{vendaDadoController.pesquisarTipoDado(7)}" ></h:commandButton>
+				<h:commandButton value="D30" 
+	 				style="cursor: pointer ; height: 45px ; margin-top: -7px ; margin-left: 10px"
+					styleClass="btn btn-secondary"
+					action="#{vendaDadoController.pesquisarTipoDado(8)}" ></h:commandButton>
+				<h:commandButton value="D100" 
+	 				style="cursor: pointer ; height: 45px ; margin-top: -7px ; margin-left: 10px"
+					styleClass="btn btn-secondary"
+					action="#{vendaDadoController.pesquisarTipoDado(9)}" ></h:commandButton>
+			</h:panelGroup>
+		</h:panelGrid>
 			
-			<h:dataTable value="#{vendaDadoController.listaDado}" var="obj">
-				<h:column>
-					<f:facet name="header">Descrição</f:facet>
-					<h:outputLabel value="#{obj.descricao}" />
-				</h:column>
-				
-				<h:column>
-					<f:facet name="header">Preço</f:facet>
-					<h:outputLabel value="#{obj.preco}">
-						<f:convertNumber  locale="pt_BR" currencySymbol="R$" type="currency"/>
-					</h:outputLabel>
-				</h:column>
-
-				<h:column>
-					<f:facet name="header">Ação</f:facet>
-					<h:commandButton value="Adicionar Carrinho"
-						actionListener="#{vendaDadoController.adicionar(obj.id)}" >
-						<f:ajax render="@all" execute="@this" />
-					</h:commandButton>
-				</h:column>
-				
-			</h:dataTable>
+			<br/>
 			
+			<h:outputLabel value="Descrição do Dado: " />
+			<h:inputText value="#{vendaDadoController.descricao}" />
+
+			<h:commandButton value="Pesquisar"
+	 			style="cursor: pointer ; height: 45px ; margin-top: -7px ; margin-left: 10px"
+	 			styleClass="btn btn-outline-secondary"
+				actionListener="#{vendaDadoController.pesquisar}" >
+			</h:commandButton>
+			
+			<br/>
+			<br/>
+			
+			<div style="width: 50% ; position: center">
+				<h:dataTable 
+					value="#{vendaDadoController.listaDado}" 
+					var="obj"
+					styleClass="table table-striped table-bordered table-hover">
+					
+					<h:column>
+						<f:facet name="header">Descrição</f:facet>
+						<h:outputLabel value="#{obj.descricao}" />
+					</h:column>
+					
+					<h:column>
+						<f:facet name="header">Preço</f:facet>
+						<h:outputLabel value="#{obj.preco}">
+							<f:convertNumber  locale="pt_BR" currencySymbol="R$" type="currency"/>
+						</h:outputLabel>
+					</h:column>
+	
+					<h:column>
+						<f:facet name="header">Ação</f:facet>
+						<h:commandButton value="Adicionar Carrinho"
+		 					style="cursor: pointer ; height: 45px ; margin-top: -7px ; margin-left: 10px"
+							styleClass="btn btn-info"
+							actionListener="#{vendaDadoController.adicionar(obj.id)}" >
+							<f:ajax render="@all" execute="@this" />
+						</h:commandButton>
+					</h:column>
+				
+				</h:dataTable>
+			</div>
 		</h:form>
 	</center>
 </ui:define>

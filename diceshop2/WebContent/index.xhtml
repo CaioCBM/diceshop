@@ -8,44 +8,74 @@
 		http-equiv="X-UA-Conpatible" />
 	<h:outputStylesheet library="css" name="bootstrap.min.css" />
 	<h:outputStylesheet library="css" name="template.css"/>  
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.maskedinput/1.4.1/jquery.maskedinput.js" type="text/javascript"></script>
+<!--<link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.css" />
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" />
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
 	
 		<title>DiceShop </title>
 	
 </h:head>
 
 <h:body>
-	 <div class="wrapper">
+	 <div class="wrapper" style="background-color: #DCDCDC	; ">
 	 	<div class="box navbar header">
-			<h1 >.: Dice Shop :.</h1>
+			<h1 > Dice Shop </h1>
 			<div >
 				<h:form>
-					<h:commandLink value="Olá #{templateController.usuarioLogado.nome}" 
+					<h:commandLink value="Cadastro de Usuário" 
+						rendered="#{templateController.usuarioLogado != null and (templateController.usuarioLogado.tipoUsuario.id == 1)}" 
+						action="usuario.xhtml?faces-redirect=true" style= "color:white ; margin: 15px"/>
+						
+					<h:commandLink value="Cadastro de Dado" 
+						rendered="#{templateController.usuarioLogado != null and (templateController.usuarioLogado.tipoUsuario.id == 1)}" 
+						action="consultadado.xhtml?faces-redirect=true" style= "color:white ; margin: 15px"/>
+						
+					<h:commandLink value="Loja" 
+						action="vendadado.xhtml?faces-redirect=true" style= "color:white ; margin: 15px"/> 
+					
+					<h:commandLink value="Carrinho" 
+						action="carrinho.xhtml?faces-redirect=true" style= "color:white ; margin-left: 15px"/> 
+						<span class="badge badge-primary"> #{templateController.carrinho} </span>
+						
+					<h:commandLink value="Login" 
+						rendered="#{templateController.usuarioLogado == null}" 
+						action="login.xhtml?faces-redirect=true"
+						style= "color:white ; margin: 15px"/>
+						
+					<h:commandLink value="Perfil" 
 						rendered="#{templateController.usuarioLogado != null}" 
 						action="perfilusuario.xhtml?faces-redirect=true"
-						style= "color:white ; "/>
-					<h:commandLink value=" (Sair)"   
+						style= "color:white ; margin: 15px ; margin-left: 30px ; "/>
+						
+					<h:commandLink value="Sair"   
 						action="#{templateController.encerrarSessao}"
 						rendered="#{templateController.usuarioLogado != null}"
-						style="color:white"/>
+						style="color:white; margin: 15px"/>
 				</h:form>
 			</div>
 	 	</div>
+	 	
+	 	<!-- 
 		<div class="box sidebar" style="text-align: center;">
 			<ui:insert name="menu">
 				<h1>Menu</h1>
 				<h:form>
-					<h:commandLink value="Index" action="index.xhtml?faces-redirect=true"/> <br/>
-					<h:commandLink value="Login" action="login.xhtml?faces-redirect=true"/> <br/>
-					<h:commandLink value="Cadastro de Usuário" action="usuario.xhtml?faces-redirect=true"/> <br/>
-					<h:commandLink value="Cadastro de Dado" action="consultadado.xhtml?faces-redirect=true"/> <br/>
-					<h:commandLink value="Venda de Dado" action="vendadado.xhtml?faces-redirect=true"/> <br/>
-					<h:commandLink value="Carrinho" action="carrinho.xhtml?faces-redirect=true"/> 
-					<span class="badge badge-primary"> #{templateController.carrinho} </span> <br/>
 
 				</h:form>
 			</ui:insert>
+		</div> 
+		 -->
+		 
+		<div class="sidebar-left">
+		 	
 		</div>
-		<div class="box content">
+		 
+		<div class="content box" style="min-height: 1000px;">
 			<br/>
 			<ui:insert name="conteudo">
 				<div align="center">
@@ -53,9 +83,21 @@
 				</div>
 			</ui:insert>
 		</div>
+		
+		<div class="sidebar-right">
+		 	
+		</div>
+		
 		<div class="box footer" style="text-align: center;">
 			<h:outputText value="2020 - UNITINS - Todos os direitos reservados." />
 		</div>
 	</div>
 </h:body>
+
+<script>
+	$( document ).ready(function() {
+		$(".dateClass").mask("99/99/9999");
+	});
+</script>
+
 </html>

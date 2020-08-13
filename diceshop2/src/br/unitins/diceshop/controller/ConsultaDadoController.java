@@ -19,21 +19,17 @@ public class ConsultaDadoController implements Serializable{
 	
 	private static final long serialVersionUID = 5971844866316069324L;
 	
-	private List<Dado> listaDado;
-	
-	private int tipoFiltro = 1;
+	private List<Dado> listaDado = null;
 	private String filtro = null;
 	
 	public void pesquisarTipoDado(int tipoDado) {
 		DadoDAO dao = new DadoDAO();
 		listaDado = dao.findByTipoDado(tipoDado);
-
 	}
 	
 	public void pesquisar() {
 		DadoDAO dao = new DadoDAO();
 		listaDado = dao.findByDescricao(getFiltro());
-
 	}
 	
 	public String novoDado() {
@@ -53,7 +49,8 @@ public class ConsultaDadoController implements Serializable{
 
 	public List<Dado> getListaDado() {
 		if (listaDado == null) {
-			listaDado = new ArrayList<Dado>();
+			DadoDAO dao = new DadoDAO();
+			listaDado = dao.findAll();
 		}
 		return listaDado;
 	}
@@ -64,14 +61,6 @@ public class ConsultaDadoController implements Serializable{
 
 	public void setFiltro(String filtro) {
 		this.filtro = filtro;
-	}
-
-	public int getTipoFiltro() {
-		return tipoFiltro;
-	}
-
-	public void setTipoFiltro(int tipoFiltro) {
-		this.tipoFiltro = tipoFiltro;
 	}
 
 }

@@ -16,20 +16,18 @@ public class Usuario extends Entity<Usuario> {
 	@Past(message = "A data não pode estar no futuro.")
 	private LocalDate dataNascimento;
 	
-	@NotBlank(message = "O login deve ser informado.")
 	private String login;
 	
 	private String senha;
 	
 	@Email(message= "E-mail inválido.")
-	@NotEmpty(message = "O E-mail deve ser informado.")
+	@NotEmpty(message = "O e-mail deve ser informado.")
 	private String email;
 	
 	private TipoUsuario tipoUsuario;
 	
-	private Endereço endereco;
+	private Endereco endereco = new Endereco();
 	
-
 	public String getNome() {
 		return nome;
 	}
@@ -77,5 +75,12 @@ public class Usuario extends Entity<Usuario> {
 	public void setTipoUsuario(TipoUsuario tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
 	}
+	
+	public Endereco getEndereco() {
+		return endereco;
+	}
 
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
 }

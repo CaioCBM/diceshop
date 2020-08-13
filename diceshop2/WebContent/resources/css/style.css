@@ -1,6 +1,6 @@
 body{
 	background: #000000;
-	padding-top: 10%;
+	padding-top: 5%;
 }
 
 .wdi-red{
@@ -33,14 +33,30 @@ body{
 }
 
 .btn-login{
+	cursor: pointer;
 	border-radius: 0;
 	background: #000000;
 	color: #fff;
 	-webkit-transition: all 0.8s;
-	transition: all 0.8s;
+	transition: all 0.5s;
 }
 .btn-login:hover{
 	background: transparent;
+	border: 1px solid #000000;
+	color: #000000;
+}
+
+.btn-register{
+	cursor: pointer;
+	border-radius: 0;
+	background: white;
+	border: 1px solid #000000;
+	color: black;
+	-webkit-transition: all 0.8s;
+	transition: all 0.5s;
+}
+.btn-register:hover{
+	background: #D3D3D3;
 	border: 1px solid #000000;
 	color: #000000;
 }

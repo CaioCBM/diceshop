@@ -10,93 +10,98 @@
 	<center>
 
 	<h:messages 
-		errorStyle="color:red" 
-		warnStyle="color:orange" 
-		infoStyle="color:green"
+		id="messages"
+		errorStyle="list-style-type: none;"
+		errorClass="alert alert-danger"
+		warnStyle="list-style-type: none;"
+		warnClass="alert alert-warning" 
+		infoStyle="list-style-type: none;"
+		infoClass="alert alert-info"
 		globalOnly="false"/>
 		
-	<h1>.:Edite seu Perfil:.</h1>
+	<h1>Edite seu Perfil</h1>
+	
+	<br/>
+	
 	<h:form>
 		<h:panelGrid columns="2">
 			<h:outputLabel value="Nome:" />
 			<h:panelGroup>
 				<h:inputText 
+					value="#{usuarioClienteController.usuarioAux.nome}"
 					id="itNome" 
-					required="true"
-					requiredMessage="Esse campo não pode ser nulo."
-					value="#{usuarioClienteController.usuarioAux.nome}">
-				</h:inputText>
-				<h:message for="itNome" style="color:red"/>
-				
+					required="true"  
+					requiredMessage="Nome deve ser informado"/>
 			</h:panelGroup>
+			
 			
 			<h:outputLabel value="Data de Nascimento:" />
 			<h:panelGroup>
-				<h:inputText 
-					id="itDataNascimento" 
-					required="true"
-					requiredMessage="Esse campo não pode ser nulo."
-					value="#{usuarioClienteController.usuarioAux.dataNascimento}">
-						<f:convertDateTime pattern="dd/MM/yyyy" type="localDate"/>
+				<h:inputText id="itDataNascimento" 
+					value="#{usuarioClienteController.usuarioAux.dataNascimento}"
+					styleClass="dateClass" 
+					required="true"  
+					requiredMessage="Aniversario deve ser informado">
+					<f:convertDateTime pattern="dd/MM/yyyy" 
+									   type="localDate"/>
 				</h:inputText>
-				<h:message for="itDataNascimento" style="color:red"/>
 			</h:panelGroup>
+			
 			
 			<h:outputLabel value="Login:" />
 			<h:panelGroup>
 				<h:inputText 
+					value="#{usuarioClienteController.usuarioAux.login}"
 					id="itLogin" 
 					required="true"
-					requiredMessage="Esse campo não pode ser nulo."
-					value="#{usuarioClienteController.usuarioAux.login}" />
-				<h:message for="itLogin" style="color:red"/>
+					requiredMessage="Login deve ser informado"/>
 			</h:panelGroup>
 			
 			<h:outputLabel value="Senha:" />
 			<h:panelGroup>
 				<h:inputSecret 
-					id="isSenha"
 					value="#{usuarioClienteController.usuarioAux.senha}" 
+					id="isSenha"
 					required="true"
-					requiredMessage="Esse campo não pode ser nulo."/>
-				<h:message for="isSenha" style="color:red"/>	
+					requiredMessage="A senha deve ser informada"/>
  			</h:panelGroup>
  			
  			<h:outputLabel value="Email:" />
 			<h:panelGroup>
 				<h:inputText 
+					value="#{usuarioClienteController.usuarioAux.email}"
 					id="itEmail" 
 					required="true"
-					requiredMessage="Esse campo não pode ser nulo."
-					value="#{usuarioClienteController.usuarioAux.email}" />
-				<h:message for="itEmail" style="color:red"/>
+					requiredMessage="E-mail deve ser informada"/>
 			</h:panelGroup>
 			
-			<h:outputLabel value="CEP:" />
+			<h:outputLabel value="CEP: " />
 			<h:panelGroup>
 				<h:inputText 
-					id="itCep" />
-					<!-- required="true"
-					requiredMessage="Esse campo não pode ser nulo."/>
-					value = CEP />-->
-				<h:message for="itCep" style="color:red"/>
+					value="#{usuarioClienteController.usuarioAux.endereco.cep}" />
 			</h:panelGroup>
 			
 			<h:outputLabel value="Endereço:" />
 			<h:panelGroup>
 				<h:inputText 
-					id="itEndereço" />
-					<!-- required="true"
-					requiredMessage="Esse campo não pode ser nulo."/>
-					value = CEP />-->
-				<h:message for="itEndereço" style="color:red"/>
+					value="#{usuarioClienteController.usuarioAux.endereco.endereco}" />
 			</h:panelGroup>
 			
+		<br/>
 		
 		</h:panelGrid>
 		<h:commandButton value="Alterar"
-			actionListener="#{usuarioClienteController.alterar}" />
+			style="cursor: pointer ; height: 40px ; margin-top: -7px ; margin-left: 5px"
+			styleClass="btn btn-outline-primary"
+			actionListener="#{usuarioClienteController.alterar}"/>
+		<h:commandButton value="Limpar" 
+			style="cursor: pointer ; height: 40px ; margin-top: -7px ; margin-left: 5px"
+			styleClass="btn btn-warning"
+			actionListener="#{usuarioController.limpar}">
+			<f:ajax execute="@this" render="@form"/>
+		</h:commandButton>			
 	</h:form>
+	
 	</center>
 	
 </ui:define>

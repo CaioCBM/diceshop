@@ -43,7 +43,8 @@ public class VendaDAO extends DAO<Venda> {
 			venda.setId(rs.getInt("id"));
 			// inserindo os itens de venda
 			
-			ItemVendaDAO dao = new ItemVendaDAO();
+//RIPItemVendaDAO dao = new ItemVendaDAO();
+			
 			for (ItemVenda itemVenda : venda.getListaItemVenda()) {
 				// informando quem eh o pai da crianca
 				itemVenda.setVenda(venda);
@@ -99,10 +100,17 @@ public class VendaDAO extends DAO<Venda> {
 			stat.setInt(3, itemVenda.getDado().getId());
 			stat.execute();
 			
+			
+			if (atualizarEstoque(itemVenda.getDado(), conn) == false) {
+				throw new Exception("Erro ao atualizar o estoque");
+			}
 //			conn.commit();
 			
 			retorno = true;
 		} catch (SQLException e) {
+			e.printStackTrace();
+			rollback(conn);
+		} catch (Exception e) {
 			e.printStackTrace();
 			rollback(conn);
 		} finally {
@@ -112,6 +120,39 @@ public class VendaDAO extends DAO<Venda> {
 		return retorno;	
 		
 	}
+	
+	private boolean atualizarEstoque(Dado dado, Connection conn) {
+
+		boolean retorno = false;
+//		Connection conn = getConnection();
+
+		StringBuffer sql = new StringBuffer();
+		sql.append("UPDATE dado SET estoque = estoque -1 ");
+		sql.append("WHERE id = ? ");
+
+		PreparedStatement stat = null;
+
+		try {
+			stat = conn.prepareStatement(sql.toString());
+
+			stat.setInt(1, dado.getId());
+
+			stat.execute();
+
+//			conn.commit();
+
+			retorno = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			rollback(conn);
+		} finally {
+			closeStatement(stat);
+	//		closeConnection(conn);
+		}
+		return retorno;	
+
+	}	
+
 	
 	public List<Venda> findByUsuario(int idUsuario) {
 		List<Venda> listaVenda = new ArrayList<Venda>();
@@ -244,7 +285,7 @@ public class VendaDAO extends DAO<Venda> {
 		sql.append("  u.senha, ");
 		sql.append("  u.email, ");
 		sql.append("  u.tipousuario, ");
-		sql.append("  u.datanascimento ");					
+		sql.append("  u.datanascimento ");
 		sql.append("FROM ");
 		sql.append("  public.venda v, ");
 		sql.append("  public.usuario u ");

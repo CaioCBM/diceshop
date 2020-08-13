@@ -43,6 +43,12 @@ public class TemplateController implements Serializable {
 		this.usuarioLogado = usuarioLogado;
 	}
 
+	public Usuario checarTipoUsuario() {
+		if (usuarioLogado == null) // buscando o usuario da sessao
+			usuarioLogado = (Usuario) Session.getInstance().getAttribute("usuarioLogado");			
+		return usuarioLogado;
+	}
+	
 	public String encerrarSessao() {
 		// encerrando a sessao
 		Session.getInstance().invalidateSession();

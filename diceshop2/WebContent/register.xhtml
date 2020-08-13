@@ -19,9 +19,18 @@
 	<!-- Container -->
 	<div class="container">
 		<div class="row justify-content-md-center">
-			<div class="col-md-6 col-md-auto login-box">		
-	 			<h:messages styleClass="alert alert-danger hmessages"  />
-						
+			<div class="col-md-6 col-md-auto login-box">	
+				
+			<h:messages 
+				id="messages"
+				errorStyle="list-style-type: none;"
+				errorClass="alert alert-danger"
+				warnStyle="list-style-type: none;"
+				warnClass="alert alert-warning" 
+				infoStyle="list-style-type: none;"
+				infoClass="alert alert-info"
+				globalOnly="false"/>			
+							
 				<h1 class="text-center wdi-red">Registrar</h1>
 				<hr />
 				<h:form>
@@ -62,7 +71,12 @@
 						<h:commandButton value="Registrar"
 							styleClass="btn btn-lg btn-block btn-login"
 							actionListener="#{usuarioController.incluir}"
-							action="#{registerController.register}" />
+							action="#{registerController.voltarLogin}" />
+						<br/>
+						<div class="small">
+							<a href="login.xhtml">Já se registrou? Volte para o Login</a>
+                        </div>	
+						
 					</div>
 				</h:form>
 			</div>

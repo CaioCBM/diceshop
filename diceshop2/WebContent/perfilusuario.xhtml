@@ -30,16 +30,29 @@
 			
 			<h:outputLabel value = "Endereço: " />
 			<h:outputLabel value="teste"/>
+			
+			
 		</h:panelGrid>
 		
+		<br/>
+		
 		<h:form>		
-			<h:commandButton value="Editar" action="usuariocliente.xhtml?faces-redirect=true"/>
+			<h:commandButton value="Editar" 
+			action="usuariocliente.xhtml?faces-redirect=true"
+			style="cursor: pointer ; "
+			styleClass="btn btn-light" />
 		</h:form>
 		
+		<br/>
+		<h2>
+			<h:outputText value="Histórico de Compras" />
+		</h2>
+		<br/>
+		
 		<h:form>
-			<h:messages style="color:red" />
-			
-			<h:dataTable value="#{perfilUsuarioController.listaVenda}" var="obj">
+			<h:dataTable value="#{perfilUsuarioController.listaVenda}" 
+				styleClass="table table-striped table-bordered table-hover"
+				var="obj">
 				
 				<h:column>
 					<f:facet name="header">Data</f:facet>
@@ -57,7 +70,10 @@
 				
 				<h:column>
 					<f:facet name="header">Ação</f:facet>
-					<h:commandButton value="Detalhes..." action="#{perfilUsuarioController.detalhes(obj)}">
+					<h:commandButton value="Detalhes..." 
+						action="#{perfilUsuarioController.detalhes(obj)}"
+						style="cursor: pointer"
+						styleClass="btn btn-info">
 						<f:ajax execute="@this" render="@none"/>
 					</h:commandButton>
 				</h:column>

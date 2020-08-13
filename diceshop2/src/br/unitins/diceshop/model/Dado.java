@@ -1,8 +1,11 @@
 package br.unitins.diceshop.model;
 
+import javax.validation.constraints.NotBlank;
+
 public class Dado extends Entity<Dado> {
 
 	private static final long serialVersionUID = -2892635712370827148L;
+	
 	private String descricao;
 	private TipoDado tipoDado;
 	private String cor;

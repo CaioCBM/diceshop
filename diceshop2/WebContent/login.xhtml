@@ -19,15 +19,26 @@
 	<div class="container">
 		<div class="row justify-content-md-center">
 			<div class="col-md-6 col-md-auto login-box">		
-	 			<h:messages styleClass="alert alert-danger hmessages"  />
-						
+				
+			<h:messages 
+				id="messages"
+				errorStyle="list-style-type: none;"
+				errorClass="alert alert-danger"
+				warnStyle="list-style-type: none;"
+				warnClass="alert alert-warning" 
+				infoStyle="list-style-type: none;"
+				infoClass="alert alert-info"
+				globalOnly="false"/>
+
+					
 				<h1 class="text-center wdi-red">Login</h1>
 				<hr />
 				<h:form>
 					<div class="form-row">
 						<div class="col-md-12">
 							<h:outputLabel style="margin-bottom:0;" value="Usuário:"  styleClass="wdi-red"/>
-							<h:inputText styleClass="form-control form-control-lg flat-input"
+							<h:inputText 
+								styleClass="form-control form-control-lg flat-input"
 								value="#{loginController.usuario.login}" />
 						</div>
 						<div class="col-md-12">

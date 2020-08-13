@@ -43,10 +43,10 @@ public class UsuarioClienteController implements Serializable{
 				Session.getInstance().setAttribute("usuarioLogado", usuarioAux);
 				Util.addInfoMessage("Alteração realizada com sucesso.");
 			} else {
-				Util.addInfoMessage("Erro ao alterar no banco de dados.");
+				Util.addErrorMessage("Erro ao alterar no banco de dados.");
 			}
 		}  else {
-			Util.addInfoMessage("Confirme se sua senha está certa.");
+			Util.addWarningMessage("Confirme se sua senha está certa.");
 		}
 	}
 	
@@ -55,10 +55,13 @@ public class UsuarioClienteController implements Serializable{
 	}
 	
 	public boolean validarSenha() {
-		if (dao.verificarSenhaAlterar(usuarioAux.getId(), Util.hashSHA256(usuarioAux.getSenha())) != null)
+		if (dao.verificarSenhaAlterar(usuarioAux.getId(), Util.hashSHA256(usuarioAux.getSenha())) != null) {
+			String senha = Util.hashSHA256(getUsuarioAux().getSenha());
+			getUsuarioAux().setSenha(senha);
 			return true;
-		else
+		} else {
 			return false;
+		}
 	}
 	
 	public Usuario getClone() {

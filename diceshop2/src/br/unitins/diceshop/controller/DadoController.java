@@ -24,8 +24,8 @@ public class DadoController extends Controller<Dado> {
 		super(new DadoDAO());
 		Flash flash = FacesContext.getCurrentInstance().
 				getExternalContext().getFlash();
-		flash.keep("flashLivro");
-		entity = (Dado) flash.get("flashLivro");
+		flash.keep("flashDado");
+		entity = (Dado) flash.get("flashDado");
 	}
 	
 	public List<Dado> getListaDado() {

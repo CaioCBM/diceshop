@@ -7,6 +7,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import br.unitins.diceshop.application.Util;
+import br.unitins.diceshop.dao.DadoDAO;
 import br.unitins.diceshop.dao.UsuarioDAO;
 import br.unitins.diceshop.model.TipoUsuario;
 import br.unitins.diceshop.model.Usuario;
@@ -18,9 +19,15 @@ public class UsuarioController extends Controller<Usuario> implements Serializab
 	private static final long serialVersionUID = -563227102506849534L;
 
 	private List<Usuario> listaUsuario;
+	private String filtro = null;
 	
 	public UsuarioController() {
 		super(new UsuarioDAO());
+	}
+	
+	public void pesquisar() {
+		UsuarioDAO dao = new UsuarioDAO();
+		listaUsuario = dao.findByNome(getFiltro());
 	}
 	
 	@Override
@@ -60,6 +67,14 @@ public class UsuarioController extends Controller<Usuario> implements Serializab
 
 	public TipoUsuario[] getListaTipoUsuario() {
 		return TipoUsuario.values();
+	}
+	
+	public String getFiltro() {
+		return filtro;
+	}
+
+	public void setFiltro(String filtro) {
+		this.filtro = filtro;
 	}
 
 }

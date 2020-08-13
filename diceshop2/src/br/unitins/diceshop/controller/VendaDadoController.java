@@ -19,11 +19,26 @@ public class VendaDadoController implements Serializable {
 
 	private static final long serialVersionUID = -8413311224021825448L;
 
-	private String descricao;
+	private String descricao = null;
 	private List<Dado> listaDado = null;
+	private String filtro = null;
+
+	public void pesquisarTipoDado(int tipoDado) {
+		DadoDAO dao = new DadoDAO();
+		listaDado = dao.findByTipoDado(tipoDado);
+	}
 	
 	public void pesquisar() {
-		listaDado = null;
+		DadoDAO dao = new DadoDAO();
+		listaDado = dao.findByDescricao(getDescricao());
+	}
+	
+	public String getFiltro() {
+		return filtro;
+	}
+
+	public void setFiltro(String filtro) {
+		this.filtro = filtro;
 	}
 	
 	public void adicionar(int idDado) {
@@ -51,18 +66,18 @@ public class VendaDadoController implements Serializable {
 		// atualizando o carrinho na sessao
 		Session.getInstance().setAttribute("carrinho", carrinho);
 		
+		Util.addInfoMessage("Adicionados " + carrinho.size() + " itens ao Carrinho");
+		
 	}
 
 	public List<Dado> getListaDado() {
 		if (listaDado == null) {
 			DadoDAO dao = new DadoDAO();
 			listaDado = dao.findAll();
-			if (listaDado == null)
-				listaDado = new ArrayList<Dado>();
 		}
 		return listaDado;
 	}
-
+	
 	public String getDescricao() {
 		return descricao;
 	}
@@ -70,5 +85,4 @@ public class VendaDadoController implements Serializable {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	
 }

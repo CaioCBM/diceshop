@@ -9,38 +9,83 @@
 
 	<center>
 
-	<h:messages 
-		errorStyle="color:red" 
-		warnStyle="color:orange" 
-		infoStyle="color:green"
-		globalOnly="false"/>
+			<h:messages 
+				id="messages"
+				errorStyle="list-style-type: none;"
+				errorClass="alert alert-danger"
+				warnStyle="list-style-type: none;"
+				warnClass="alert alert-warning" 
+				infoStyle="list-style-type: none;"
+				infoClass="alert alert-info"
+				globalOnly="false"/>
 		
-	<h1>.:Consulta de Dados:.</h1>
+	<h1>Cadastro de Dados</h1>
+	
+	<br/>
+	
 	<h:form>
-		
 		<h:panelGrid columns="5">
 			<h:panelGroup>
-				<h:commandLink value="D4" action="#{consultaDadoController.pesquisarTipoDado(2)}" >
-				</h:commandLink>
+				<h:commandButton value="D4" 
+	 				style="cursor: pointer ; height: 45px ; margin-top: -7px ; margin-left: 10px"
+					styleClass="btn btn-secondary"
+					action="#{consultaDadoController.pesquisarTipoDado(2)}" ></h:commandButton>
+				<h:commandButton value="D6" 
+	 				style="cursor: pointer ; height: 45px ; margin-top: -7px ; margin-left: 10px"
+					styleClass="btn btn-secondary"
+					action="#{consultaDadoController.pesquisarTipoDado(3)}" ></h:commandButton>
+				<h:commandButton value="D8" 
+	 				style="cursor: pointer ; height: 45px ; margin-top: -7px ; margin-left: 10px"
+					styleClass="btn btn-secondary"
+					action="#{consultaDadoController.pesquisarTipoDado(4)}" ></h:commandButton>
+				<h:commandButton value="D10" 
+	 				style="cursor: pointer ; height: 45px ; margin-top: -7px ; margin-left: 10px"
+					styleClass="btn btn-secondary"
+					action="#{consultaDadoController.pesquisarTipoDado(5)}" ></h:commandButton>
+				<h:commandButton value="D12" 
+	 				style="cursor: pointer ; height: 45px ; margin-top: -7px ; margin-left: 10px"
+					styleClass="btn btn-secondary"
+					action="#{consultaDadoController.pesquisarTipoDado(6)}" ></h:commandButton>
+				<h:commandButton value="D20" 
+	 				style="cursor: pointer ; height: 45px ; margin-top: -7px ; margin-left: 10px"
+					styleClass="btn btn-secondary"
+					action="#{consultaDadoController.pesquisarTipoDado(7)}" ></h:commandButton>
+				<h:commandButton value="D30" 
+	 				style="cursor: pointer ; height: 45px ; margin-top: -7px ; margin-left: 10px"
+					styleClass="btn btn-secondary"
+					action="#{consultaDadoController.pesquisarTipoDado(8)}" ></h:commandButton>
+				<h:commandButton value="D100" 
+	 				style="cursor: pointer ; height: 45px ; margin-top: -7px ; margin-left: 10px"
+					styleClass="btn btn-secondary"
+					action="#{consultaDadoController.pesquisarTipoDado(9)}" ></h:commandButton>
 			</h:panelGroup>
-			
-			<h:panelGroup>
-				<h:inputText 
-					value="#{consultaDadoController.filtro}" />
-			</h:panelGroup>
-			
-			<h:commandButton value="Pesquisar"
-				actionListener="#{consultaDadoController.pesquisar}" />
-				
-			<h:commandButton value="+ Novo Dado"
-				action="#{consultaDadoController.novoDado}" />
-		
 		</h:panelGrid>
+		
+		<br/>
+		
+		<h:panelGroup>
+			<h:inputText 
+				value="#{consultaDadoController.filtro}" />
+		</h:panelGroup>
+		
+		<h:commandButton value="Pesquisar"
+	 		style="cursor: pointer ; height: 45px ; margin-top: -7px ; margin-left: 10px"
+	 		styleClass="btn btn-outline-secondary"
+			actionListener="#{consultaDadoController.pesquisar}" />
+		
+		<h:commandButton value="Adicionar Dado"
+	 		style="cursor: pointer ; height: 45px ; margin-top: -7px ; margin-left: 10px"
+	 		styleClass="btn btn-info"
+			action="#{consultaDadoController.novoDado}" />
 			
 	</h:form>
+	
+	<br/>
+	
 	<h:form id="formDataTable">
 		<h:dataTable id="dataTable" value="#{consultaDadoController.listaDado}" 
-					 var="obj">
+					 var="obj" 
+					 styleClass="table table-striped table-bordered table-hover">
 			   <h:column>
 			      <f:facet name="header">Descrição</f:facet>
 			      <h:outputLabel value="#{obj.descricao}"/>
@@ -65,7 +110,9 @@
 			   </h:column>
 			   <h:column>
 			      <f:facet name="header">Ação</f:facet>
-			      <h:commandLink value="Editar" 
+			      <h:commandButton value="Editar" 
+			      		style="cursor: pointer"
+			      		styleClass="btn btn-outline-primary float-right"
 			      		action="#{consultaDadoController.editar(obj)}"/>
 			   </h:column>		   
 		</h:dataTable>

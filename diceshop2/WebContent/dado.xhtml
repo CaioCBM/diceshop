@@ -9,21 +9,29 @@
 
 	<center>
 
+
 	<h:messages 
-		errorStyle="color:red" 
-		warnStyle="color:orange" 
-		infoStyle="color:green"
-		globalOnly="false"/>
+		style="list-style-type: none;"
+		id="messages"
+		errorClass="alert alert-danger"
+		warnClass="alert alert-warning" 
+		infoClass="alert alert-info"
 		
-	<h1>.:Cadastro de Dado:.</h1>
+		globalOnly="false"/>
+				
+	<h1>Cadastro de Dado</h1>
+	
+	<br/>
+	
 	<h:form>
-		<h:panelGrid columns="2">
+		<h:panelGrid columns="2" class="col-md-3">
 			<h:outputLabel value="Descrição:" />
 			<h:panelGroup>
 				<h:inputText 
+					required="true"
+					requiredMessage="Preencha a Descrição"
 					id="itDescricao" 
 					value="#{dadoController.entity.descricao}" />
-				<h:message for="itDescricao" style="color:red"/>
 			</h:panelGroup>
 			
 			<h:outputLabel value="Tipo de Dado:" />
@@ -38,84 +46,65 @@
 			<h:outputLabel value="Cor:" />			
 			<h:panelGroup>
 				<h:inputText 
+					required="true"
+					requiredMessage="Preencha a Cor"
 					id="itCor" 
 					value="#{dadoController.entity.cor}" />
-				<h:message for="itCor" style="color:red"/>
 			</h:panelGroup>
 			
 			<h:outputLabel value="Preço:" />
 			<h:panelGroup>
 				<h:inputText 
+					required="true"
+					requiredMessage="Preencha o valor do Preço"
+					onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;"
 					id="itPreco" 
-					value="#{dadoController.entity.preco}" />
-				<h:message for="itPreco" style="color:red"/>
+					value="#{dadoController.entity.preco}"/>
 			</h:panelGroup>
 			
 			<h:outputLabel value="Estoque:" />			
 			<h:panelGroup>
 				<h:inputText 
+					required="true"
+					requiredMessage="Preencha o valor do Estoque"
+					onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;"
 					id="itEstoque" 
 					value="#{dadoController.entity.estoque}" />
-				<h:message for="itEstoque" style="color:red"/>
-			</h:panelGroup>									
-
+			</h:panelGroup>
+		</h:panelGrid >
 		
-		</h:panelGrid>
+		<br/>
+		
 		<h:commandButton value="Incluir"
+			style="cursor: pointer ; height: 40px ; margin-top: -7px ; margin-left: 5px"
+			styleClass="btn btn-outline-primary"
 			disabled="#{dadoController.entity.id != null}"
 			actionListener="#{dadoController.incluir}" />
 			
 		<h:commandButton value="Alterar"
+			style="cursor: pointer ; height: 40px ; margin-top: -7px ; margin-left: 5px"
+			styleClass="btn btn-outline-primary"
 			disabled="#{dadoController.entity.id == null}"
 			actionListener="#{dadoController.alterar}">
 		</h:commandButton>
 			
 		<h:commandButton value="Excluir"
+			style="cursor: pointer ; height: 40px ; margin-top: -7px ; margin-left: 5px"
+			styleClass="btn btn-danger"
 			disabled="#{dadoController.entity.id == null}"
 			actionListener="#{dadoController.remover}" >
 			<f:ajax execute="@this" render="@form formDataTable"/>
 		</h:commandButton>
 		
 		<h:commandButton value="Limpar" 
+			style="cursor: pointer ; height: 40px ; margin-top: -7px ; margin-left: 5px"
+			styleClass="btn btn-warning"
 			actionListener="#{dadoController.limpar}">
 			<f:ajax execute="@this" render="@form"/>
 		</h:commandButton>		
 	</h:form>
 	
-	<h:form id="formDataTable">
-		<h:dataTable id="dataTable" value="#{dadoController.listaDado}" 
-					 var="obj">
-			   <h:column>
-			      <f:facet name="header">Descrição</f:facet>
-			      <h:outputLabel value="#{obj.descricao}"/>
-			   </h:column>
-			   <h:column>
-			      <f:facet name="header">Preço</f:facet>
-			      <h:outputLabel value="#{obj.preco}">
-			      	<f:convertNumber  locale="pt_BR" currencySymbol="R$" type="currency"/>
-			      </h:outputLabel>
-			   </h:column>
-			   <h:column>
-			      	<f:facet name="header">Tipo de Dado</f:facet>
-			     	<h:outputLabel value="#{obj.tipoDado.label}">
-					</h:outputLabel>
-							
-			   </h:column>
-			   <h:column>
-			      <f:facet name="header">Cor</f:facet>
-			      <h:outputLabel value="#{obj.cor}"/>
-			   </h:column>
-			   <h:column>
-			      <f:facet name="header">Estoque</f:facet>
-			      <h:outputLabel value="#{obj.estoque}"/>
-			   </h:column>
-			   <h:column>
-			      <f:facet name="header">Ação</f:facet>
-			      <h:commandLink value="Editar" 
-			      		action="#{dadoController.editar(obj)}"/>
-			   </h:column>		   
-		</h:dataTable>
-	</h:form>
+	<br/>
 	
 	</center>
 	

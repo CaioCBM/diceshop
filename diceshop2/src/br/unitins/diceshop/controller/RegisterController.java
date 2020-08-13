@@ -12,7 +12,7 @@ import br.unitins.diceshop.model.Usuario;
 @RequestScoped
 public class RegisterController {
 	
-	public String register() {
+	public String voltarLogin() {
 		return "login.xhtml?faces-redirect=true";
 	}
 }
